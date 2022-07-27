@@ -1,5 +1,6 @@
 // DEPENDENCIES
 const express = require('express')
+const mongoose = require('mongoose')
 
 // CONFIGURATION
 require('dotenv').config()
@@ -13,6 +14,10 @@ app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.static('public'))
 // DEPENDENCIES
 const methodOverride = require('method-override')
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, 
+  () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
+)
+
 
 // MIDDLEWARE
 app.use(methodOverride('_method'))
